@@ -1,36 +1,6 @@
+import { coinImages } from "@/data";
 import Image from "next/image";
 import Marquee from "react-fast-marquee";
-
-const coinImages = [
-  {
-    src: "https://i.postimg.cc/g2RxCHj5/Ellipse-6.png",
-    alt: "coin",
-  },
-  {
-    src: "https://i.postimg.cc/g2RxCHj5/Ellipse-6.png",
-    alt: "coin",
-  },
-  {
-    src: "https://i.postimg.cc/g2RxCHj5/Ellipse-6.png",
-    alt: "coin",
-  },
-  {
-    src: "https://i.postimg.cc/Gmkp73Sn/Ellipse-9.png",
-    alt: "coin",
-  },
-  {
-    src: "https://i.postimg.cc/vm2D9qN4/Ellipse-10.png",
-    alt: "coin",
-  },
-  {
-    src: "https://i.postimg.cc/D0PTQmwx/Ellipse-11.png",
-    alt: "coin",
-  },
-  {
-    src: "https://i.postimg.cc/Hs3mVJKx/Ellipse-17.png",
-    alt: "coin",
-  },
-];
 
 const CoinImage = ({ src, alt }: { src: string; alt: string }) => (
   <Image src={src} width={64} height={64} alt={alt} />

@@ -51,7 +51,7 @@ const MenuList = () => {
 };
 
 const ToolKit = () => {
-  const { isFeatureEnabled, toggleFeatureFlag } = useContext(AppContext);
+  const { toggleFeatureFlag } = useContext(AppContext);
 
   return (
     <div className="flex items-center gap-5">
