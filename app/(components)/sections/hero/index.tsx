@@ -147,42 +147,45 @@ const HeadlineSection = () => {
   );
 };
 const StatsSection = () => {
-  const statRefs = Array.from({ length: stats.length }, () => useRef(null));
-
-  useEffect(() => {
-    statRefs.forEach((ref, index) => {
-      gsap.fromTo(
-        ref.current,
-        {
-          opacity: 0,
-          y: 50,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          delay: index * 0.2 + 1.05, // stagger the animation
-          ease: "power2.inOut",
-        }
-      );
-    });
-  }, [statRefs]);
-
   return (
     <div className="grid grid-cols-2 gap-5 max-w-[30rem]">
       {stats.map((stat, index) => (
-        <div
-          key={index}
-          ref={statRefs[index]}
-          className="flex gap-3 items-center"
-        >
-          {stat.icon}
-          <div className="flex flex-col text-white">
-            <span className="font-semibold text-xl">{stat.value}</span>
-            <span>{stat.label}</span>
-          </div>
-        </div>
+        <StatsCard item={stat} index={index} />
       ))}
+    </div>
+  );
+};
+
+interface StatsCardProps {
+  index: number;
+  item: any;
+}
+const StatsCard = ({ index, item }: StatsCardProps) => {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    gsap.fromTo(
+      ref.current,
+      {
+        opacity: 0,
+        y: 50,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: index * 0.2 + 1.05, // stagger the animation
+        ease: "power2.inOut",
+      }
+    );
+  });
+  return (
+    <div key={index} ref={ref} className="flex gap-3 items-center">
+      {item.icon}
+      <div className="flex flex-col text-white">
+        <span className="font-semibold text-xl">{item.value}</span>
+        <span>{item.label}</span>
+      </div>
     </div>
   );
 };
