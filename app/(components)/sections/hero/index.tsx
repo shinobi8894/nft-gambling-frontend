@@ -147,7 +147,7 @@ const HeadlineSection = () => {
   );
 };
 const StatsSection = () => {
-  const statRefs = stats.map(() => useRef(null));
+  const statRefs = Array.from({ length: stats.length }, () => useRef(null));
 
   useEffect(() => {
     statRefs.forEach((ref, index) => {
@@ -170,18 +170,19 @@ const StatsSection = () => {
 
   return (
     <div className="grid grid-cols-2 gap-5 max-w-[30rem]">
-      {stats.map((stat, index) => {
-        const ref = statRefs[index]; // Get the ref for the current stat
-        return (
-          <div key={index} ref={ref} className="flex gap-3 items-center">
-            {stat.icon}
-            <div className="flex flex-col text-white">
-              <span className="font-semibold text-xl">{stat.value}</span>
-              <span>{stat.label}</span>
-            </div>
+      {stats.map((stat, index) => (
+        <div
+          key={index}
+          ref={statRefs[index]}
+          className="flex gap-3 items-center"
+        >
+          {stat.icon}
+          <div className="flex flex-col text-white">
+            <span className="font-semibold text-xl">{stat.value}</span>
+            <span>{stat.label}</span>
           </div>
-        );
-      })}
+        </div>
+      ))}
     </div>
   );
 };
