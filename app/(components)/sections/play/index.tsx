@@ -5,6 +5,7 @@ import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
+import { fadeInUp, scaleIn } from "@/animations/headline";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,24 +13,9 @@ const ImageGallery = () => {
   const imageRef = useRef(null);
 
   useEffect(() => {
-    gsap.fromTo(
-      imageRef.current,
-      {
-        opacity: 0,
-        scale: 0.9,
-      },
-      {
-        scrollTrigger: {
-          trigger: imageRef.current,
-          start: "top center",
-          end: "center center",
-          scrub: true,
-        },
-        opacity: 1,
-        scale: 1,
-        duration: 1,
-      }
-    );
+    if (imageRef.current) {
+      scaleIn(imageRef.current, true);
+    }
   }, []);
   return (
     <div
@@ -64,34 +50,22 @@ const ImageGallery = () => {
 };
 
 const PlaySection = () => {
-  useEffect(() => {
-    const section = gsap.utils.selector(".play-section");
+  const playContentRef = useRef(null);
 
-    gsap.fromTo(
-      section(".play-content"),
-      {
-        opacity: 0,
-        y: 50,
-      },
-      {
-        scrollTrigger: {
-          trigger: section(".play-content"),
-          start: "top bottom",
-          end: "top center",
-          toggleActions: "play none none reverse",
-        },
-        opacity: 1,
-        y: 0,
-        duration: 1,
-      }
-    );
+  useEffect(() => {
+    if (playContentRef.current) {
+      fadeInUp(playContentRef.current, true);
+    }
   }, []);
 
   return (
     <section className="play-section flex justify-center mb-20 p-2">
       <div className="flex w-full max-w-container items-center justify-between gap-3 flex-col md:flex-row">
         <ImageGallery />
-        <div className="play-content flex flex-col p-2 items-center md:items-start text-white max-w-[640px] order-1 mb-10 md:mb-0 md:order-2">
+        <div
+          ref={playContentRef}
+          className="flex flex-col p-2 items-center md:items-start text-white max-w-[640px] order-1 mb-10 md:mb-0 md:order-2"
+        >
           <h1 className="font-bold mb-5 text-3xl text-center md:text-left lg:text-6xl md:text-5xl sm:text-3xl">
             Play Top Casino Games
           </h1>

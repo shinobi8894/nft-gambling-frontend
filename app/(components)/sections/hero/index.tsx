@@ -6,25 +6,15 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { stats } from "@/data";
 import Rewards from "@/components/basic/icons/rewards";
+import { fadeInUp, scaleIn } from "@/animations/headline";
 
 export default function HeroSection() {
   const imageRef = useRef(null);
 
   useEffect(() => {
-    gsap.fromTo(
-      imageRef.current,
-      {
-        opacity: 0,
-        scale: 0.8,
-      },
-      {
-        opacity: 1,
-        scale: 1,
-        duration: 1,
-        delay: 1.5, // adjust the delay to your liking
-        ease: "power2.inOut",
-      }
-    );
+    if (imageRef.current) {
+      scaleIn(imageRef.current, false);
+    }
   }, [imageRef]);
 
   return (
@@ -59,64 +49,18 @@ const HeadlineSection = () => {
   const tagRef = useRef(null);
 
   useEffect(() => {
-    gsap.fromTo(
-      tagRef.current,
-      {
-        opacity: 0,
-        y: 50,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power2.inOut",
-      }
-    );
-
-    gsap.fromTo(
-      headingRef.current,
-      {
-        opacity: 0,
-        y: 50,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        delay: 0.35,
-        ease: "power2.inOut",
-      }
-    );
-
-    gsap.fromTo(
-      contentRef.current,
-      {
-        opacity: 0,
-        y: 50,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        delay: 0.7,
-        ease: "power2.inOut",
-      }
-    );
-
-    gsap.fromTo(
-      buttonRef.current,
-      {
-        opacity: 0,
-        y: 50,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        delay: 1.05,
-        ease: "power2.inOut",
-      }
-    );
+    if (tagRef.current) {
+      fadeInUp(tagRef.current, false, 0);
+    }
+    if (headingRef.current) {
+      fadeInUp(headingRef.current, false, 0.35);
+    }
+    if (contentRef.current) {
+      fadeInUp(contentRef.current, false, 0.7);
+    }
+    if (buttonRef.current) {
+      fadeInUp(buttonRef.current, false, 1.05);
+    }
   }, [headingRef, contentRef, buttonRef, tagRef]);
 
   return (

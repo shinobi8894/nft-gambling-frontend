@@ -1,5 +1,6 @@
 "use client";
 
+import { fadeInUp } from "@/animations/headline";
 import { faqData } from "@/data";
 import { Accordion, AccordionItem } from "@szhsin/react-accordion";
 import { gsap } from "gsap";
@@ -51,43 +52,13 @@ const FAQSection: React.FC = () => {
   useEffect(() => {
     // Animate the header
     if (headerRef.current) {
-      gsap.fromTo(
-        headerRef.current,
-        {
-          y: -50,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          scrollTrigger: {
-            trigger: headerRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
+      fadeInUp(headerRef.current, true);
     }
 
     // Animate each FAQ item
-    gsap.fromTo(
-      itemRef.current,
-      {
-        y: 50,
-        opacity: 0,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.5,
-        scrollTrigger: {
-          trigger: itemRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
+    if (itemRef.current) {
+      fadeInUp(itemRef.current, true);
+    }
   }, []);
 
   return (

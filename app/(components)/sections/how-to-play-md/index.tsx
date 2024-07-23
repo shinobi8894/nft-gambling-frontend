@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import First from "@/components/basic/icons/first";
 import Second from "@/components/basic/icons/second";
@@ -7,6 +7,7 @@ import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
+import { fadeInUp } from "@/animations/headline";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,7 +15,7 @@ interface StepProps {
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
   title: string;
   description: string;
-  ref:any
+  ref: any;
 }
 
 const Step: React.FC<StepProps> = ({ Icon, title, description, ref }) => (
@@ -45,21 +46,7 @@ const HowToPlayMdSection: React.FC = () => {
     // Register each step with GSAP ScrollTrigger
     stepsRef.current.forEach((step, index) => {
       if (step) {
-        gsap.fromTo(
-          step,
-          { opacity: 0, y: 50 }, // Start state
-          {
-            opacity: 1,
-            y: 0, // End state
-            duration: 0.5,
-            delay: index * 0.1, // Stagger effect
-            scrollTrigger: {
-              trigger: step,
-              start: "top 80%", // Trigger when the top of the step is 80% from the top of the viewport
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
+        fadeInUp(step, true);
       }
     });
   }, []);

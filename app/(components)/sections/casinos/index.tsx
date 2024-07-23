@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { fadeInUp } from "@/animations/headline";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,35 +19,11 @@ export default function CasinosSection() {
     const headingElement = headingRef.current;
 
     if (headingElement) {
-      gsap.fromTo(
-        headingElement,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          scrollTrigger: {
-            trigger: headingElement,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
+      fadeInUp(headingElement, true);
     }
 
     if (element) {
-      gsap.fromTo(
-        element,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          scrollTrigger: {
-            trigger: element,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
+      fadeInUp(element, true);
     }
   }, []);
 
@@ -98,20 +75,7 @@ const CasinoCard: React.FC<CasinoCardProps> = ({
     const element = cardRef.current;
 
     if (element) {
-      gsap.fromTo(
-        element,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          scrollTrigger: {
-            trigger: element,
-            start: "top 80%", // Trigger when the top of the element is 80% from the top of the viewport
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
+      fadeInUp(element, true);
     }
   }, []);
 

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
+import { fadeInUp, scaleIn } from "@/animations/headline";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,19 +24,7 @@ const LiveBettingInfo: React.FC<LiveBettingInfoProps> = ({
     const element = contentRef.current;
 
     if (element) {
-      gsap.fromTo(
-        element,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          scrollTrigger: {
-            trigger: element,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
+      fadeInUp(element, true);
     }
   }, []);
 
@@ -66,19 +55,7 @@ const LiveSection: React.FC = () => {
     const element = imageRef.current;
 
     if (element) {
-      gsap.fromTo(
-        element,
-        { opacity: 0, scale: 0.8 },
-        {
-          opacity: 1,
-          scale: 1,
-          scrollTrigger: {
-            trigger: element,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
+      scaleIn(element, true);
     }
   }, []);
 

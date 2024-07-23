@@ -1,5 +1,6 @@
 "use client";
 
+import { fadeInUp } from "@/animations/headline";
 import Email from "@/components/basic/icons/email";
 import Telegram from "@/components/basic/icons/telegram";
 import { gsap } from "gsap";
@@ -68,25 +69,15 @@ const ContactSection: React.FC = () => {
     const element = sectionRef.current;
 
     if (element) {
-      gsap.fromTo(
-        element,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          scrollTrigger: {
-            trigger: element,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
+      fadeInUp(element, true);
     }
   }, []);
 
   return (
-    <section ref={sectionRef} className="flex justify-center mb-20 pt-10 pl-2 pr-2 pb-10 bg-card">
+    <section
+      ref={sectionRef}
+      className="flex justify-center mb-20 pt-10 pl-2 pr-2 pb-10 bg-card"
+    >
       <div className="flex w-full max-w-container justify-between flex-col items-center md:items-start md:flex-row">
         <ContactHeader />
         <ContactForm />

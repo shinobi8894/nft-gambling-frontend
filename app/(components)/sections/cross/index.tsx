@@ -6,6 +6,7 @@ import { logos } from "@/data";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { fadeInUp, scaleIn } from "@/animations/headline";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -46,24 +47,9 @@ const CrossSectionImage = () => {
   const imageRef = useRef(null);
 
   useEffect(() => {
-    gsap.fromTo(
-      imageRef.current,
-      {
-        opacity: 0,
-        scale: 0.9,
-      },
-      {
-        scrollTrigger: {
-          trigger: imageRef.current,
-          start: "top center",
-          end: "center center",
-          scrub: true,
-        },
-        opacity: 1,
-        scale: 1,
-        duration: 1,
-      }
-    );
+    if (imageRef.current) {
+      scaleIn(imageRef.current, true);
+    }
   }, []);
 
   return (
@@ -84,26 +70,11 @@ export default function CrossSection() {
   const contentRef = useRef(null);
 
   useEffect(() => {
-    gsap.fromTo(
-      contentRef.current,
-      {
-        opacity: 0,
-        y: -50,
-      },
-      {
-        scrollTrigger: {
-          trigger: contentRef.current,
-          start: "top center",
-          end: "center center",
-          scrub: true,
-        },
-        opacity: 1,
-        y: 0,
-        duration: 1,
-      }
-    );
+    if (contentRef.current) {
+      fadeInUp(contentRef.current, true);
+    }
   }, []);
-  
+
   return (
     <section className="flex justify-end mb-20">
       <div className="flex justify-between flex-col md:flex-row items-center gap-20">

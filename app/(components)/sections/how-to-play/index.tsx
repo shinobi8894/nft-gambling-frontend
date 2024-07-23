@@ -9,6 +9,7 @@ import Right from "@/components/basic/icons/right";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { images, steps } from "@/data";
+import { fadeInUp, scaleIn } from "@/animations/headline";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,37 +31,11 @@ const HowToPlaySection: React.FC = () => {
     const swiper = swiperRef.current;
 
     if (instructions) {
-      gsap.fromTo(
-        instructions,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          scrollTrigger: {
-            trigger: instructions,
-            start: "top center",
-            end: "center center",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
+      fadeInUp(instructions, true);
     }
 
     if (swiper) {
-      gsap.fromTo(
-        swiper,
-        { opacity: 0, scale: 0.8 },
-        {
-          opacity: 1,
-          scale: 1,
-          scrollTrigger: {
-            trigger: swiper,
-            start: "top center",
-            end: "center center",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
+      scaleIn(swiper, true);
     }
   }, []);
 
