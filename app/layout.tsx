@@ -1,8 +1,15 @@
+import { Montserrat } from "next/font/google";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import { AppContextProvider } from "@/context/context";
+import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
 
-const inter = Inter({ subsets: ["latin"] });
+import "./globals.css";
+import "swiper/css";
+import "swiper/css/navigation";
+import SmoothScrolling from "@/components/custom/smooth-scroll";
+
+const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +23,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${montserrat.className} bg-main overflow-y-hidden`}>
+        <SmoothScrolling>
+          <AppContextProvider>
+            <Header />
+            {children}
+            <Footer />
+          </AppContextProvider>
+        </SmoothScrolling>
+      </body>
     </html>
   );
 }
